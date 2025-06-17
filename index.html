@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zidan Abdullah - Portfolio R&T</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -15,15 +15,23 @@
         }
 
         :root {
-            --primary: #00ff88;
-            --secondary: #0066ff;
-            --accent: #ff0066;
-            --dark: #0a0a0a;
-            --dark-light: #1a1a1a;
-            --gray: #333;
-            --light-gray: #666;
-            --text: #ffffff;
-            --text-muted: #b0b0b0;
+            --primary: #E50914;
+            --primary-dark: #B8070F;
+            --secondary: #8A2BE2;
+            --accent: #FF1493;
+            --dark: #0F0F0F;
+            --dark-light: #1A1A1A;
+            --dark-medium: #2A2A2A;
+            --gray: #3A3A3A;
+            --light-gray: #6A6A6A;
+            --text: #FFFFFF;
+            --text-muted: #B8B8B8;
+            --text-light: #E0E0E0;
+            --glass: rgba(255, 255, 255, 0.1);
+            --gradient-1: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-2: linear-gradient(135deg, var(--secondary), var(--accent));
+            --shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            --shadow-light: 0 10px 30px rgba(229, 9, 20, 0.3);
         }
 
         body {
@@ -32,169 +40,293 @@
             color: var(--text);
             overflow-x: hidden;
             scroll-behavior: smooth;
-            transition: all 0.3s ease;
+            line-height: 1.6;
         }
 
-        /* Navigation */
+        /* Glass Morphism Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+
+        /* Navigation Élégante */
         .nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
+            background: rgba(15, 15, 15, 0.85);
+            backdrop-filter: blur(30px);
             z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(229, 9, 20, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
             padding: 1rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 15, 15, 0.95);
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 2rem;
+            padding: 0 3rem;
         }
 
         .logo {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            color: var(--primary);
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .nav-links a {
-            color: var(--text);
+            color: var(--text-light);
             text-decoration: none;
-            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
             position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
         }
 
         .nav-links a:hover,
         .nav-links a.active {
             color: var(--primary);
+            background: rgba(229, 9, 20, 0.1);
+            transform: translateY(-2px);
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
             width: 0;
             height: 2px;
-            background: var(--primary);
-            transition: width 0.3s;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+            border-radius: 2px;
         }
 
         .nav-links a:hover::after,
         .nav-links a.active::after {
-            width: 100%;
+            width: 60%;
         }
 
-        /* Hero Section */
+        /* Navigation Circulaire */
+        .page-navigation {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nav-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(229, 9, 20, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-circle:hover {
+            transform: scale(1.1);
+            background: rgba(229, 9, 20, 0.2);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-light);
+        }
+
+        .nav-circle.active {
+            background: var(--gradient-1);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-light);
+        }
+
+        .nav-circle i {
+            font-size: 1.2rem;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .nav-circle.active i {
+            color: var(--dark);
+        }
+
+        .nav-circle .tooltip {
+            position: absolute;
+            right: 70px;
+            background: var(--dark-light);
+            color: var(--text);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .nav-circle:hover .tooltip {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Hero Section Moderne */
         .hero {
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+            background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.1) 0%, transparent 50%), 
+                        linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
             position: relative;
             overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,215,0,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
         }
 
         .hero-content {
             text-align: center;
             z-index: 2;
-            max-width: 800px;
+            max-width: 900px;
             padding: 0 2rem;
+            animation: heroFadeIn 1.5s ease-out;
+        }
+
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-title {
-            font-size: clamp(2.5rem, 8vw, 6rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: -2px;
+            line-height: 1.1;
         }
 
         .hero-subtitle {
-            font-size: 1.5rem;
-            color: var(--text-muted);
+            font-size: 1.8rem;
+            color: var(--text-light);
             margin-bottom: 2rem;
             font-family: 'JetBrains Mono', monospace;
+            font-weight: 400;
+            letter-spacing: 1px;
         }
 
         .hero-description {
-            font-size: 1.1rem;
-            line-height: 1.6;
+            font-size: 1.2rem;
+            line-height: 1.8;
             margin-bottom: 3rem;
             color: var(--text-muted);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .cta-button {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            gap: 0.8rem;
+            padding: 1.2rem 2.5rem;
+            background: var(--gradient-1);
             color: var(--dark);
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
-        }
-
-        /* Animated Background */
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .network-node {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.5); }
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(229, 9, 20, 0.4);
         }
 
         /* Sections */
         .section {
-            padding: 5rem 0;
-            max-width: 1200px;
+            padding: 6rem 0;
+            max-width: 1400px;
             margin: 0 auto;
-            padding-left: 2rem;
-            padding-right: 2rem;
+            padding-left: 3rem;
+            padding-right: 3rem;
         }
 
         .section-contenu {
             display: none;
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
         }
 
         .section-contenu.section-active {
@@ -204,275 +336,634 @@
         }
 
         .section-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 4rem;
             text-align: center;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--gradient-1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: -1px;
+            position: relative;
         }
 
-        /* About Section */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-1);
+            border-radius: 2px;
+        }
+
+        /* About Section Révolutionnée */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 2fr;
-            gap: 4rem;
+            gap: 5rem;
             align-items: center;
+            margin-top: 3rem;
+        }
+
+        .profile-section {
+            position: relative;
         }
 
         .profile-card {
-            background: linear-gradient(135deg, var(--dark-light), var(--gray));
-            padding: 2rem;
-            border-radius: 20px;
+            background: var(--glass);
+            backdrop-filter: blur(30px);
+            padding: 3rem;
+            border-radius: 30px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(229, 9, 20, 0.2);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
         }
 
-        .profile-avatar {
-            width: 150px;
-            height: 150px;
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-1);
+        }
+
+        .profile-image-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            margin: 0 auto 1rem;
+            object-fit: cover;
+            border: 4px solid rgba(229, 9, 20, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 25px 50px rgba(229, 9, 20, 0.2);
+        }
+
+        .profile-image-placeholder {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--gradient-1);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 4rem;
+            color: var(--text);
+            border: 4px solid rgba(229, 9, 20, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .profile-details {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .profile-details p {
+            margin-bottom: 0.5rem;
+        }
+
+        .terminal {
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(229, 9, 20, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .terminal-header {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(229, 9, 20, 0.2);
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #FF5F56; }
+        .terminal-dot.yellow { background: #FFBD2E; }
+        .terminal-dot.green { background: #27CA3F; }
+
+        .terminal-line {
+            margin-bottom: 0.8rem;
+            animation: typewriter 0.5s ease-in-out;
+        }
+
+        @keyframes typewriter {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .terminal-prompt {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .terminal-output {
+            color: var(--text-light);
         }
 
         .about-text {
             font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-muted);
+            line-height: 1.9;
+            color: var(--text-light);
+        }
+
+        .about-text p {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--glass);
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .about-text p:hover {
+            transform: translateX(10px);
+            background: rgba(229, 9, 20, 0.05);
         }
 
         .about-text strong {
             color: var(--primary);
+            font-weight: 600;
         }
 
-        /* Skills Section */
+        /* Skills Section Modernisée */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
         }
 
         .skill-card {
-            background: linear-gradient(135deg, var(--dark-light), var(--gray));
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            background: var(--glass);
+            backdrop-filter: blur(30px);
+            padding: 2.5rem;
+            border-radius: 25px;
+            border: 1px solid rgba(229, 9, 20, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
         }
 
         .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(229, 9, 20, 0.2);
+            border-color: var(--primary);
         }
 
         .skill-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
+            font-size: 3rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
         }
 
         .skill-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
             color: var(--text);
         }
 
         .skill-subtitle {
             color: var(--text-muted);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
         }
 
         .skill-progress {
             background: rgba(255, 255, 255, 0.1);
-            height: 8px;
-            border-radius: 4px;
+            height: 10px;
+            border-radius: 5px;
             overflow: hidden;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .skill-progress::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                rgba(229,9,20,0.1) 0%, 
+                rgba(229,9,20,0.3) 50%, 
+                rgba(229,9,20,0.1) 100%);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .skill-progress-bar,
         .barre-progression {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 4px;
-            transition: width 2s ease;
+            background: var(--gradient-1);
+            border-radius: 5px;
+            transition: width 2s ease-in-out;
             width: 0%;
+            position: relative;
+            overflow: hidden;
         }
 
         .skill-description {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        .skill-description h4 {
-            color: var(--primary);
-            margin-bottom: 0.8rem;
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .skill-description ul {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 1rem;
-        }
-
-        .skill-description li {
-            margin-bottom: 0.6rem;
-            padding-left: 1.2rem;
-            position: relative;
-            line-height: 1.4;
-        }
-
-        .skill-description li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        .skill-description strong {
-            color: var(--secondary);
-            font-weight: 600;
-        }
-
-        .skill-description em {
-            color: var(--primary);
-            font-style: italic;
-            font-size: 0.85rem;
-            background: rgba(0, 255, 136, 0.1);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            border-left: 2px solid var(--primary);
+            line-height: 1.7;
         }
 
         /* Projects Section */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
         }
 
         .project-card,
         .carte-projet {
-            background: linear-gradient(135deg, var(--dark-light), var(--gray));
-            border-radius: 15px;
+            background: var(--glass);
+            backdrop-filter: blur(30px);
+            border-radius: 25px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(229, 9, 20, 0.2);
+            transition: all 0.4s ease;
             cursor: pointer;
+            position: relative;
         }
 
         .project-card:hover,
         .carte-projet:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 102, 255, 0.2);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(229, 9, 20, 0.2);
+            border-color: var(--primary);
         }
 
         .project-header {
-            padding: 1.5rem;
-            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            padding: 2rem;
+            background: var(--gradient-2);
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
         }
 
         .project-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            position: relative;
+            z-index: 1;
         }
 
         .project-type {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
 
         .project-content {
-            padding: 1.5rem;
+            padding: 2rem;
         }
 
         .project-description {
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 1rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
         }
 
         .project-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.8rem;
         }
 
         .tag {
-            background: rgba(0, 255, 136, 0.2);
+            background: rgba(229, 9, 20, 0.2);
             color: var(--primary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            border: 1px solid rgba(0, 255, 136, 0.3);
+            padding: 0.4rem 1rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(229, 9, 20, 0.3);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: var(--primary);
+            color: var(--text);
+            transform: scale(1.05);
         }
 
         /* Contact Section */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+            gap: 5rem;
+            align-items: start;
+            margin-top: 3rem;
         }
 
         .contact-info {
-            background: linear-gradient(135deg, var(--dark-light), var(--gray));
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--glass);
+            backdrop-filter: blur(30px);
+            padding: 3rem;
+            border-radius: 25px;
+            border: 1px solid rgba(229, 9, 20, 0.2);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info h3 {
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            font-weight: 700;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            color: var(--text-muted);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+            padding: 1rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(229, 9, 20, 0.05);
+            transform: translateX(10px);
         }
 
         .contact-item i {
             color: var(--primary);
+            font-size: 1.4rem;
+            width: 25px;
+        }
+
+        /* Stats et Passions Tech */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(229, 9, 20, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(229, 9, 20, 0.2);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon {
+            color: var(--primary);
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+
+        .tech-stack, .interests {
+            margin-bottom: 3rem;
+        }
+
+        .tech-stack h4, .interests h4 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
             font-size: 1.2rem;
-            width: 20px;
+            font-weight: 700;
         }
 
-        .social-links {
-            display: flex;
+        .tech-items, .interest-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
-            margin-top: 2rem;
         }
 
-        .social-link {
+        .tech-item, .interest-item {
+            background: rgba(229, 9, 20, 0.1);
+            padding: 1rem;
+            border-radius: 15px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--dark);
-            border-radius: 50%;
-            text-decoration: none;
-            transition: transform 0.3s;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(229, 9, 20, 0.2);
         }
 
-        .social-link:hover {
-            transform: scale(1.1);
+        .tech-item:hover, .interest-item:hover {
+            background: rgba(229, 9, 20, 0.2);
+            transform: translateY(-3px);
+            border-color: var(--primary);
+        }
+
+        .tech-item i, .interest-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .tech-item span, .interest-item span {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-1);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 0.8rem;
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 4px solid var(--dark);
+            box-shadow: 0 0 0 4px var(--primary);
+        }
+
+        .timeline-year {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .timeline-content {
+            background: var(--glass);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            backdrop-filter: blur(20px);
+        }
+
+        .timeline-content h4 {
+            color: var(--text);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .timeline-content p {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .quote-section {
+            margin-top: 4rem;
+            padding: 3rem;
+            background: var(--glass);
+            border-radius: 25px;
+            border-left: 5px solid var(--primary);
+            backdrop-filter: blur(30px);
+            position: relative;
+        }
+
+        blockquote {
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin: 0;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        blockquote::before {
+            content: '"';
+            font-size: 5rem;
+            color: var(--primary);
+            position: absolute;
+            left: -2rem;
+            top: -2rem;
+            font-family: serif;
+            opacity: 0.3;
         }
 
         /* Modal Styles */
@@ -483,12 +974,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
         }
 
         .modal-overlay.modal-active,
@@ -498,324 +989,157 @@
 
         .modal-content {
             background: var(--dark-light);
-            border-radius: 20px;
+            border-radius: 30px;
             max-width: 90vw;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(229, 9, 20, 0.3);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
         }
 
-        .fermer-modale,
-        .bouton-fermer {
+        .fermer-modale {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(229, 9, 20, 0.2);
             border: none;
-            color: var(--text);
-            font-size: 2rem;
+            color: var(--primary);
+            font-size: 1.8rem;
             cursor: pointer;
             z-index: 10001;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background: rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .fermer-modale:hover {
+            background: var(--primary);
+            color: var(--text);
+            transform: scale(1.1);
         }
 
         .contenu-modale {
-            padding: 2rem;
+            padding: 3rem;
         }
 
         .en-tete-modale {
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             text-align: center;
         }
 
         .titre-projet {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: var(--primary);
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
         }
 
         .periode-projet {
             color: var(--text-muted);
             font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
         }
 
         .section-modale {
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
         .section-modale h3 {
-            color: var(--secondary);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .icone-section {
-            font-size: 1.2rem;
-        }
-
-        .liste-objectifs,
-        .liste-taches,
-        .liste-preuves {
-            list-style: none;
-            padding: 0;
-        }
-
-        .objectif-item,
-        .tache-item,
-        .preuve-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
-            margin-bottom: 0.5rem;
-            border-radius: 8px;
-            border-left: 3px solid var(--primary);
-        }
-
-        .bloc-code {
-            background: #1a1a1a;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-top: 1rem;
-        }
-
-        .en-tete-code {
-            background: #333;
-            padding: 0.5rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .copier-code {
-            background: none;
-            border: none;
             color: var(--primary);
-            cursor: pointer;
-            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.4rem;
+            font-weight: 700;
         }
 
-        .bloc-code pre {
-            padding: 1rem;
-            margin: 0;
-            overflow-x: auto;
+        .contexte-projet,
+        .participation-projet,
+        .bilan-projet {
+            background: var(--glass);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            backdrop-filter: blur(20px);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: var(--text-light);
         }
 
-        .bloc-code code {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
+        .objectif-texte,
+        .tache-texte,
+        .preuve-texte {
+            background: rgba(229, 9, 20, 0.05);
+            padding: 1.2rem;
+            margin-bottom: 0.8rem;
+            border-radius: 12px;
+            border-left: 3px solid var(--secondary);
+            line-height: 1.6;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .objectif-texte:hover,
+        .tache-texte:hover,
+        .preuve-texte:hover {
+            background: rgba(229, 9, 20, 0.1);
+            transform: translateX(5px);
         }
 
         .competences-projet {
             display: flex;
-            gap: 0.5rem;
+            gap: 1rem;
             flex-wrap: wrap;
-            margin-bottom: 1rem;
+            margin-top: 2rem;
         }
 
         .etiquette-competence {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--gradient-1);
             color: var(--dark);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-light);
         }
 
         .etiquette-competence:hover {
-            transform: scale(1.05);
-        }
-
-        .actions-modale {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-
-        .bouton-primaire,
-        .bouton-secondaire {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .bouton-primaire {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--dark);
-        }
-
-        .bouton-secondaire {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .bouton-primaire:hover,
-        .bouton-secondaire:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
-        }
-
-        /* Timeline */
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 2rem;
-            padding-left: 2rem;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -1rem;
-            top: 0.5rem;
-            width: 12px;
-            height: 12px;
-            background: var(--primary);
-            border-radius: 50%;
-            border: 3px solid var(--dark);
-            box-shadow: 0 0 0 3px var(--primary);
-        }
-
-        .timeline-year {
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-content h4 {
-            color: var(--text);
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-content p {
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        .quote-section {
-            margin-top: 3rem;
-            padding: 2rem;
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 102, 255, 0.1));
-            border-radius: 15px;
-            border-left: 4px solid var(--primary);
-        }
-
-        blockquote {
-            font-style: italic;
-            font-size: 1.1rem;
-            color: var(--text);
-            margin: 0;
-            position: relative;
-        }
-
-        blockquote::before {
-            content: '"';
-            font-size: 4rem;
-            color: var(--primary);
-            position: absolute;
-            left: -1rem;
-            top: -1rem;
-            font-family: serif;
-        }
-
-        /* Terminal */
-        .terminal {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 1rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            margin: 2rem 0;
-        }
-
-        .terminal-header {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid #333;
-        }
-
-        .terminal-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .terminal-dot.red { background: #ff5f56; }
-        .terminal-dot.yellow { background: #ffbd2e; }
-        .terminal-dot.green { background: #27ca3f; }
-
-        .terminal-line {
-            margin-bottom: 0.5rem;
-        }
-
-        .terminal-prompt {
-            color: var(--primary);
-        }
-
-        .terminal-command {
-            color: var(--secondary);
-        }
-
-        .terminal-output {
-            color: var(--text-muted);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);
         }
 
         /* Footer */
         .footer {
             background: var(--dark-light);
-            padding: 2rem 0;
+            padding: 3rem 0;
             text-align: center;
             color: var(--text-muted);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(229, 9, 20, 0.2);
+            margin-top: 5rem;
         }
 
         .footer-content {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Masquer l'accueil quand on navigue */
-        body.masquer-accueil .hero {
-            display: none;
+            padding: 0 3rem;
         }
 
         /* Animations */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s, transform 0.6s;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
         }
 
         .fade-in.visible {
@@ -824,13 +1148,13 @@
         }
 
         .animation-entree {
-            animation: slideInUp 0.6s ease-out forwards;
+            animation: slideInUp 0.8s ease-out forwards;
         }
 
         @keyframes slideInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -838,48 +1162,36 @@
             }
         }
 
-        /* Notifications */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--dark-light);
-            border: 1px solid var(--primary);
-            border-radius: 8px;
-            padding: 1rem;
-            z-index: 10000;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .nav-container {
+                padding: 0 2rem;
+            }
+            
+            .section {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
         }
 
-        .notification.notification-visible {
-            transform: translateX(0);
-        }
-
-        .contenu-notification {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .notification-succes {
-            border-color: var(--primary);
-        }
-
-        .notification-erreur {
-            border-color: var(--accent);
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
 
+            .page-navigation {
+                right: 1rem;
+            }
+
+            .nav-circle {
+                width: 50px;
+                height: 50px;
+            }
+
             .about-grid,
             .contact-grid {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: 3rem;
             }
 
             .hero-title {
@@ -887,69 +1199,146 @@
             }
 
             .section {
-                padding: 3rem 1rem;
+                padding: 4rem 1.5rem;
             }
 
             .modal-content {
                 max-width: 95vw;
                 margin: 1rem;
             }
+
+            .contenu-modale {
+                padding: 2rem;
+            }
+
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .tech-items,
+            .interest-list {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .tech-item,
+            .interest-item {
+                padding: 0.8rem;
+            }
+
+            .tech-item span,
+            .interest-item span {
+                font-size: 0.8rem;
+            }
         }
 
-        /* États d'interaction */
-        .competence-surlignee {
-            background: rgba(0, 255, 136, 0.2);
-            border-color: var(--primary);
-            transform: scale(1.02);
-        }
-
-        .element-visible {
-            opacity: 1;
-            transform: translateY(0);
+        /* États d'interaction avancés */
+        .masquer-accueil .hero {
+            display: none;
         }
 
         .portfolio-loaded {
-            /* Styles appliqués après le chargement */
+            /* Styles appliqués après chargement */
+        }
+
+        /* Effets de particules */
+        .floating-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.1;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 0.3;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navigation principale -->
     <nav class="nav">
         <div class="nav-container">
-            <div class="logo">zidan.abdoullah@gmail.com:~$</div>
+            <div class="logo">zidan portfolio</div>
             <ul class="nav-links menu-navigation">
                 <li><a href="#home" data-section="introduction">Accueil</a></li>
-                <li><a href="#about" data-section="about">À propos</a></li>
+                <li><a href="#about" data-section="about">À propos de moi</a></li>
                 <li><a href="#skills" data-section="competences">Compétences</a></li>
-                <li><a href="#projects" data-section="projects">Projets</a></li>
-                <li><a href="#contact" data-section="contact">Contact</a></li>
+                <li><a href="#projects" data-section="projects">SAE</a></li>
+                <li><a href="#contact" data-section="contact">Mes contacts</a></li>
             </ul>
         </div>
     </nav>
 
+    <!-- Navigation circulaire -->
+    <div class="page-navigation">
+        <div class="nav-circle" data-section="introduction">
+            <i class="fas fa-home"></i>
+            <span class="tooltip">Accueil</span>
+        </div>
+        <div class="nav-circle" data-section="about">
+            <i class="fas fa-user"></i>
+            <span class="tooltip">À propos</span>
+        </div>
+        <div class="nav-circle" data-section="competences">
+            <i class="fas fa-cogs"></i>
+            <span class="tooltip">Compétences</span>
+        </div>
+        <div class="nav-circle" data-section="projects">
+            <i class="fas fa-briefcase"></i>
+            <span class="tooltip">Projets</span>
+        </div>
+        <div class="nav-circle" data-section="contact">
+            <i class="fas fa-envelope"></i>
+            <span class="tooltip">Contact</span>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-bg"></div>
+        <div class="floating-particles"></div>
         <div class="hero-content">
             <h1 class="hero-title">Zidan Abdullah</h1>
-            <p class="hero-subtitle">BUT Réseaux & Télécoms</p>
+            <p class="hero-subtitle">BUT Réseaux & Télécommunications</p>
             <p class="hero-description">
                 Étudiant passionné par l'administration réseau, la cybersécurité et les télécommunications.
                 En quête d'excellence technique et d'innovation dans le domaine des infrastructures IT.
             </p>
             <a href="#about" class="cta-button bouton-action" data-section="about">
-                <i class="fas fa-terminal"></i>
-                Découvrir mon profil
+                <i class="fas fa-rocket"></i>
+                Découvrir mon univers
             </a>
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- Section Accueil -->
     <section id="introduction" class="section section-contenu section-active">
         <div class="hero-content">
             <h1 class="hero-title">Zidan Abdullah</h1>
-            <p class="hero-subtitle">BUT Réseaux & Télécoms</p>
+            <p class="hero-subtitle">BUT Réseaux & Télécommunications</p>
             <p class="hero-description">
                 Étudiant passionné par l'administration réseau, la cybersécurité et les télécommunications.
                 En quête d'excellence technique et d'innovation dans le domaine des infrastructures IT.
@@ -957,37 +1346,51 @@
         </div>
     </section>
 
+    <!-- Section À propos -->
     <section id="about" class="section section-contenu">
         <h2 class="section-title fade-in">À propos de moi</h2>
         <div class="about-grid">
-            <div class="profile-card fade-in">
-                <div class="profile-avatar">
-                    <i class="fas fa-user-cog"></i>
-                </div>
-                <h3>Zidan Abdullah</h3>
-                <p>19 ans • IUT de Caen</p>
-                <p>Première année BUT R&T</p>
-                
-                <div class="terminal">
-                    <div class="terminal-header">
-                        <div class="terminal-dot red"></div>
-                        <div class="terminal-dot yellow"></div>
-                        <div class="terminal-dot green"></div>
+            <div class="profile-section fade-in">
+                <div class="profile-card">
+                    <div class="profile-image-container">
+                        <!-- Emplacement pour votre photo -->
+                        <img src="photo2.png" 
+                             alt="Zidan Abdullah" 
+                             class="profile-image" 
+                             id="profileImage">
                     </div>
-                    <div class="terminal-line">
-                        <span class="terminal-prompt">Zidan Abdullah :</span> 
+                    <h3 class="profile-name">Zidan Abdullah</h3>
+                    <div class="profile-details">
+                        <p><strong>19 ans</strong> • IUT de Caen</p>
+                        <p>Première année BUT R&T</p>
+                        <p>Passionné de technologie et d'innovation</p>
                     </div>
-                    <div class="terminal-line">
-                        <span class="terminal-output">Étudiant BUT Réseaux & Télécoms</span>
-                    </div>
-                    <div class="terminal-line">
-                        <span class="terminal-output">Passionné de cybersécurité</span>
-                    </div>
-                    <div class="terminal-line">
-                        <span class="terminal-output">Futur ingénieur réseau</span>
+                    
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            <div class="terminal-dot red"></div>
+                            <div class="terminal-dot yellow"></div>
+                            <div class="terminal-dot green"></div>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">Mon portfolio</span> 
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-output">Étudiant BUT Réseaux & Télécoms</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-output">Passionné de cybersécurité</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-output">Futur ingénieur réseau</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">Mon portfolio</span> <span class="terminal-output">█</span>
+                        </div>
                     </div>
                 </div>
             </div>
+            
             <div class="about-text fade-in">
                 <p>
                     Bonjour ! Je suis <strong>Zidan Abdullah</strong>, étudiant en première année de BUT Réseaux & Télécommunications à l'IUT de Caen. 
@@ -1007,11 +1410,11 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Section Compétences -->
     <section id="competences" class="section section-contenu">
-        <h2 class="section-title fade-in">Compétences techniques</h2>
+        <h2 class="section-title fade-in">Compétences Techniques</h2>
         <div class="skills-grid">
-            <div class="skill-card fade-in" id="competence-ue1">
+            <div class="skill-card fade-in">
                 <div class="skill-icon">
                     <i class="fas fa-network-wired"></i>
                 </div>
@@ -1026,7 +1429,7 @@
                 </p>
             </div>
 
-            <div class="skill-card fade-in" id="competence-ue2">
+            <div class="skill-card fade-in">
                 <div class="skill-icon">
                     <i class="fas fa-broadcast-tower"></i>
                 </div>
@@ -1041,7 +1444,7 @@
                 </p>
             </div>
 
-            <div class="skill-card fade-in" id="competence-ue3">
+            <div class="skill-card fade-in">
                 <div class="skill-icon">
                     <i class="fas fa-code"></i>
                 </div>
@@ -1102,9 +1505,10 @@
             </div>
         </div>
     </section>
-    <!-- Projects Section -->
+
+    <!-- Section Projets -->
     <section id="projects" class="section section-contenu">
-        <h2 class="section-title fade-in">Projets académiques</h2>
+        <h2 class="section-title fade-in">Projets Académiques</h2>
         <div class="projects-grid">
             <div class="project-card carte-projet" data-projet="cybersecurite">
                 <div class="project-header">
@@ -1126,7 +1530,7 @@
                 </div>
             </div>
 
-            <div class="project-card carte-projet" data-projet="sae11">
+            <div class="project-card carte-projet" data-projet="reseaux">
                 <div class="project-header">
                     <h3 class="project-title">SAE 1.2 - Réseaux</h3>
                     <p class="project-type">Initiation aux réseaux informatiques</p>
@@ -1146,7 +1550,7 @@
                 </div>
             </div>
 
-            <div class="project-card carte-projet fade-in">
+            <div class="project-card carte-projet">
                 <div class="project-header">
                     <h3 class="project-title">SAE 1.3 - Télécommunications</h3>
                     <p class="project-type">Découvrir un dispositif de transmission</p>
@@ -1166,7 +1570,7 @@
                 </div>
             </div>
 
-            <div class="project-card carte-projet fade-in">
+            <div class="project-card carte-projet" data-projet="site_web">
                 <div class="project-header">
                     <h3 class="project-title">SAE 1.4 - Site Web</h3>
                     <p class="project-type">Se présenter sur internet</p>
@@ -1186,7 +1590,7 @@
                 </div>
             </div>
 
-            <div class="project-card carte-projet fade-in">
+            <div class="project-card carte-projet" data-projet="API">
                 <div class="project-header">
                     <h3 class="project-title">SAE 1.5 - API</h3>
                     <p class="project-type">Traiter des données</p>
@@ -1201,12 +1605,12 @@
                         <span class="tag">API</span>
                         <span class="tag">JavaScript</span>
                         <span class="tag">Données</span>
-                        <span class="tag">Dynamic</span>
+                        <span class="tag">Dynamique</span>
                     </div>
                 </div>
             </div>
 
-            <div class="project-card carte-projet" data-projet="integration_systeme">
+            <div class="project-card carte-projet" data-projet="Windows_server">
                 <div class="project-header">
                     <h3 class="project-title">SAE 2.1 - Windows Server</h3>
                     <p class="project-type">Construire un réseau informatique pour une entreprise</p>
@@ -1226,7 +1630,7 @@
                 </div>
             </div>
 
-            <div class="project-card carte-projet" data-projet="analyse_signaux">
+            <div class="project-card carte-projet" data-projet="analyse_de_signaux">
                 <div class="project-header">
                     <h3 class="project-title">SAE 2.2 - Analyse de signaux</h3>
                     <p class="project-type">Mesurer et caractériser un signal ou un système</p>
@@ -1246,7 +1650,7 @@
                 </div>
             </div>
 
-            <div class="project-card carte-projet" data-projet="application_web">
+            <div class="project-card carte-projet" data-projet="instant_weather">
                 <div class="project-header">
                     <h3 class="project-title">SAE 2.03 - Instant Weather</h3>
                     <p class="project-type">Site web météorologique</p>
@@ -1288,19 +1692,19 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Section Contact -->
     <section id="contact" class="section section-contenu">
-        <h2 class="section-title fade-in">Contact & Perspectives</h2>
+        <h2 class="section-title fade-in">Contact & Passions Tech</h2>
         <div class="contact-grid">
             <div class="contact-info fade-in">
                 <h3>Informations de contact</h3>
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i>
-                    <span>Zidan.abdoullah@gmail.com</span>
+                    <span>zidan.abdoullah@gmail.com</span>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-phone"></i>
-                    <span>+33 X XX XX XX XX</span>
+                    <span>+33 6 58 23 29 47</span>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-map-marker-alt"></i>
@@ -1310,53 +1714,93 @@
                     <i class="fas fa-graduation-cap"></i>
                     <span>IUT de Caen - BUT R&T</span>
                 </div>
-
-                <div class="social-links">
-                    <a href="#" class="social-link">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fas fa-file-pdf"></i>
-                    </a>
-                </div>
             </div>
             
-            <div class="objectives fade-in">
-                <h3>Objectifs professionnels</h3>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-year">2024-2025</div>
-                        <div class="timeline-content">
-                            <h4>Consolidation des acquis</h4>
-                            <p>Approfondissement des compétences en cybersécurité et réseaux. 
-                            Préparation de certifications professionnelles.</p>
+            <div class="tech-passion fade-in">
+                <h3>Mes Passions Tech & Stats</h3>
+                
+                <!-- Stats Cool -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">9</div>
+                        <div class="stat-label">SAE Réalisées</div>
+                        <div class="stat-icon"><i class="fas fa-tasks"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Heures de Code</div>
+                        <div class="stat-icon"><i class="fas fa-code"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">UE Maîtrisées</div>
+                        <div class="stat-icon"><i class="fas fa-trophy"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Veille Tech</div>
+                        <div class="stat-icon"><i class="fas fa-brain"></i></div>
+                    </div>
+                </div>
+
+                <!-- Technologies préférées -->
+                <div class="tech-stack">
+                    <h4>🚀 Stack Technologique</h4>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fab fa-python"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fab fa-js-square"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fab fa-linux"></i>
+                            <span>Linux</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-network-wired"></i>
+                            <span>Cisco</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fab fa-docker"></i>
+                            <span>Docker</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Cybersec</span>
                         </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">2025-2026</div>
-                        <div class="timeline-content">
-                            <h4>Spécialisation</h4>
-                            <p>Choix de parcours en cybersécurité. Recherche d'alternance 
-                            en entreprise pour allier théorie et pratique.</p>
+                </div>
+
+                <!-- Centres d'intérêt -->
+                <div class="interests">
+                    <h4>💡 Centres d'Intérêt</h4>
+                    <div class="interest-list">
+                        <div class="interest-item">
+                            <i class="fas fa-gamepad"></i>
+                            <span>Gaming & E-sport</span>
                         </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">2027+</div>
-                        <div class="timeline-content">
-                            <h4>Carrière d'ingénieur</h4>
-                            <p>Ingénieur en sécurité des systèmes d'information. 
-                            Expertise technique et opportunités internationales.</p>
+                        <div class="interest-item">
+                            <i class="fas fa-robot"></i>
+                            <span>Intelligence Artificielle</span>
+                        </div>
+                        <div class="interest-item">
+                            <i class="fas fa-satellite"></i>
+                            <span>Technologies Émergentes</span>
+                        </div>
+                        <div class="interest-item">
+                            <i class="fas fa-lock"></i>
+                            <span>Ethical Hacking</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="quote-section">
                     <blockquote>
-                        "La sécurité informatique n'est pas une destination, 
-                        c'est un voyage continu d'apprentissage et d'adaptation."
+                        "Le futur appartient à ceux qui comprennent la technologie,
+                        pas seulement qui l'utilisent."
                     </blockquote>
                 </div>
             </div>
@@ -1367,7 +1811,7 @@
     <footer class="footer">
         <div class="footer-content">
             <p>&copy; 2024 Zidan Abdullah - Portfolio BUT Réseaux & Télécoms</p>
-            <p>Conçu avec passion pour l'excellence technique</p>
+            <p>Conçu avec passion pour l'excellence technique ✨</p>
         </div>
     </footer>
 
@@ -1386,121 +1830,144 @@
         const PORTFOLIO_CONFIG = {
             currentPage: 'introduction',
             animationSpeed: 300,
-            theme: 'professional',
+            theme: 'premium',
             isLoading: false
         };
 
         // Base de données des projets académiques
         const PROJETS_ACADEMIQUES = {
-            sae11: {
-                nom: "Infrastructure Réseau Entreprise",
-                periode: "SAE 1.2 - Septembre 2024",
-                contexte: "Conception complète d'une infrastructure réseau pour une PME de 50 employés, avec segmentation par services et implémentation de solutions de sécurité avancées.",
-                objectifs_techniques: [
-                    "Planification d'un adressage IPv4 hiérarchique avec VLSM",
-                    "Configuration de VLANs par département (RH, Comptabilité, IT)",
-                    "Implémentation du protocole OSPF pour le routage dynamique",
-                    "Mise en place de politiques de sécurité avec ACLs",
-                    "Configuration de serveurs DHCP redondants"
-                ],
-                ma_participation: "En tant que responsable de l'architecture réseau, j'ai conçu le plan d'adressage complet et configuré l'ensemble des équipements Cisco.",
-                taches_realisees: [
-                    "Analyse des besoins et dimensionnement du réseau",
-                    "Configuration des commutateurs multicouches Cisco 3750",
-                    "Paramétrage du routage OSPF sur routeurs 2911",
-                    "Tests de connectivité et validation des performances",
-                    "Documentation technique complète de l'infrastructure"
-                ],
-                preuves_travail: [
-                    "Schéma détaillé de l'architecture réseau",
-                    "Fichiers de configuration Cisco complets"
-                ],
-                extrait_config: `! Configuration OSPF sur routeur principal
-router ospf 1
- network 192.168.10.0 0.0.0.255 area 0
- network 192.168.20.0 0.0.0.255 area 1
- area 1 stub
-!
-interface vlan 10
- ip address 192.168.10.1 255.255.255.0`,
-                bilan_personnel: "Ce projet m'a permis d'approfondir mes compétences en conception réseau et en configuration d'équipements Cisco. La principale difficulté concernait l'optimisation du routage OSPF.",
-                competences_validees: ["UE1", "UE2"]
-            },
-
             cybersecurite: {
                 nom: "SAE 1.1 - Sensibilisation à l'hygiène informatique et à la cybersécurité",
                 periode: "SAE 1.1 - Octobre 2024", 
                 contexte: "Travail collectif de groupe dans le but de découvrir les fondamentaux de la cybersécurité dans le cadre d'un MOOC de l'ANSSI.",
                 objectifs_techniques: [
-                   "Suivre le programme de formation en ligne de l’ANSSI",
-        "Valider différents modules liés à la sécurité des mots de passe, des postes de travail, des communications, des données, et de l'administration des accès",
-        "Expérimenter certaines techniques de protection (comme le chiffrage de données, la création de mots de passe robustes, et la détection de messages frauduleux)",
-        "Réaliser une évaluation finale afin d’obtenir le certificat de l’ANSSI"
-    ],
+                   "Suivre le programme de formation en ligne de l'ANSSI",
+                   "Valider différents modules liés à la sécurité des mots de passe, des postes de travail, des communications, des données, et de l'administration des accès",
+                   "Expérimenter certaines techniques de protection (comme le chiffrage de données, la création de mots de passe robustes, et la détection de messages frauduleux)",
+                   "Réaliser une évaluation finale afin d'obtenir le certificat de l'ANSSI"
+                ],
                 ma_participation: "Mon groupe a choisi le lot B : Accès SSH. J'ai été chargé d'expliquer les mécanismes de sécurisation des connexions SSH, notamment :",
                 taches_realisees: [
                     "Explication du fonctionnement des clefs publique et privée dans le cas de l'asymétrie",
-    "Présentation des principes fondamentaux du chiffrement et du déchiffrement",
-    "Démonstration de la méthode de César afin d’illustrer le décalage de caractères",
-    "Mise en place d'un cas pratique de chiffrement de messages avec la méthode de César",
-    "Comparaison entre chiffrement symétrique et asymétrique",
-    "Explication des cas d'utilisation de la cryptographie dans la sécurité des communications",
-    "Rédaction d'un schéma récapitulatif sur le fonctionnement des clefs, du chiffrement et de la décryption",
-    "Présentation des risques liés à l'utilisation de méthodes de chiffrement faibles"
-],
+                    "Présentation des principes fondamentaux du chiffrement et du déchiffrement",
+                    "Démonstration de la méthode de César afin d'illustrer le décalage de caractères",
+                    "Mise en place d'un cas pratique de chiffrement de messages avec la méthode de César",
+                    "Comparaison entre chiffrement symétrique et asymétrique",
+                    "Explication des cas d'utilisation de la cryptographie dans la sécurité des communications",
+                    "Rédaction d'un schéma récapitulatif sur le fonctionnement des clefs, du chiffrement et de la décryption",
+                    "Présentation des risques liés à l'utilisation de méthodes de chiffrement faibles"
+                ],
                 preuves_travail: [
                     "Notice technique collaborative sur SSH",
                     "Configurations SSH sécurisées",
                     "Rapport d'expérimentation sur Debian",
-                    "Présentation orale sur le  SSH"
+                    "Présentation orale sur le SSH"
                 ],
-
-                image: "https://the-dark-zidan.github.io/PORTFOLIO/mooc.png",
-                
-
                 bilan_personnel: "Cette SAE m'a permis de comprendre en profondeur les mécanismes cryptographiques qui sécurisent nos connexions quotidiennes. L'étude du protocole SSH m'a fait réaliser la complexité des échanges de clés et l'importance cruciale de la gestion des certificats. Le travail en groupe sur les recommandations de l'ANSSI m'a sensibilisé aux standards de sécurité nationaux. La partie pratique sur Debian m'a donné de l'expérience concrète en administration système sécurisée. Cette expérience a renforcé mon intérêt pour la cybersécurité et m'a donné les bases solides pour poursuivre dans cette voie.",
                 competences_validees: ["UE1"]
             },
 
-            application_web: {
-                nom: "Application de Monitoring Réseau",
-                periode: "SAE 2.3 - Mars 2024",
-                contexte: "Développement d'une application web responsive permettant de visualiser en temps réel l'état des équipements réseau du laboratoire.",
+            reseaux: {
+                nom: "Infrastructure Réseau Entreprise",
+                periode: "SAE 1.2 - Septembre 2024",
+                contexte: "Dans le cadre de ce projet, j'ai participé à la refonte complète du réseau d'une entreprise fictive en vue de renforcer sa fiabilité et sa sécurité. L'objectif était de remplacer une architecture rudimentaire par une infrastructure moderne, segmentée en VLANs et virtualisée, intégrant les services essentiels.",
                 objectifs_techniques: [
-                    "Interface web responsive avec dashboard interactif",
-                    "Récupération de données via protocole SNMP",
-                    "Base de données pour historisation des métriques",
-                    "Système d'alertes par email",
-                    "Graphiques dynamiques avec Chart.js"
+                    "La création et la configuration des VLANs selon l'organigramme fourni.",
+                    "Le routage inter-VLAN sur un commutateur L3 (Cisco 3750).",
+                    "La mise en place du RapidPVST+ pour optimiser la convergence réseau.",
+                    "L'agrégation de liens pour améliorer la bande passante et la redondance.",
+                    "Configuration de serveurs DHCP redondants",
+                    "L'installation et la configuration d'un serveur Debian virtualisé via Proxmox pour héberger les services tels que le DHCP, le DNS cache, le partage de fichiers SMB et le site web interne."
                 ],
-                ma_participation: "Développement complet de l'application, de l'architecture backend à l'interface utilisateur.",
+                ma_participation: "En tant que membre actif du projet, j'ai pris en charge la gestion des machines virtuelles, la configuration complète des VLANs et des ports, ainsi que la mise en place du RapidPVST et du service DHCP pour assurer un réseau fiable et segmenté.",
                 taches_realisees: [
-                    "Conception de l'architecture MVC en PHP",
-                    "Développement des requêtes SNMP pour collecte de données",
-                    "Création de l'interface utilisateur",
-                    "Implémentation du système d'alertes",
-                    "Tests et déploiement sur serveur Apache"
+                    "Création et configuration des machines virtuelles sous Proxmox",
+                    "Mise en place des VLANs selon l'organigramme de l'entreprise",
+                    "Attribution et documentation détaillée des ports pour chaque VLAN",
+                    "Configuration du protocole RapidPVST+ pour optimiser la résilience du réseau",
+                    "Déploiement et configuration du service DHCP pour chaque VLAN avec des exclusions d'adresses",
+                    "Routage statique sur le routeur Cisco 2911 vers la passerelle internet",
+                    "Réalisation du plan d'adressage IPv4 optimisé pour l'ensemble du réseau",
+                    "Vérification de la connectivité et résolution des problèmes de distribution DHCP",
+                    "Rédaction de la documentation technique et des schémas logiques du réseau"
                 ],
                 preuves_travail: [
-                    "Code source de l'application",
-                    "Démonstration de l'interface web"
+                    "Documentation technique complète du réseau",
+                    "Schémas logiques et physiques de l'infrastructure",
+                    "Configurations des équipements Cisco",
+                    "Tests de connectivité et validation des services"
                 ],
-                extrait_config: `// Fonction de collecte de données SNMP
-function collecterDonneesEquipement($ip_equipement) {
-    $session = new SNMP(SNMP::VERSION_2c, $ip_equipement, 'public');
-    return array(
-        'cpu_usage' => $session->get('1.3.6.1.4.1.9.2.1.58.0'),
-        'memory_usage' => $session->get('1.3.6.1.4.1.9.2.1.8.0')
-    );
-}`,
-                bilan_personnel: "Ce projet m'a permis de combiner mes compétences réseau avec le développement web, créant une solution pratique répondant à un vrai besoin.",
+                bilan_personnel: "Ce projet m'a permis de développer de solides compétences techniques en configuration réseau et en virtualisation. J'ai appris à concevoir une architecture complète et sécurisée, à gérer efficacement les VLANs et à automatiser l'attribution des adresses IP via le DHCP. J'ai également renforcé ma capacité à résoudre des problèmes concrets, notamment lors des tests de connectivité inter-VLAN et de la mise en place du routage statique. La gestion des machines virtuelles m'a familiarisé avec Proxmox et m'a appris à optimiser les ressources disponibles. Enfin, ce projet m'a fait prendre conscience de l'importance de la documentation pour assurer la maintenance et la pérennité d'un réseau d'entreprise.",
+                competences_validees: ["UE1", "UE2"]
+            },
+            
+            site_web: {
+                nom: "Site Web Personnel Responsive",
+                periode: "SAE 1.4 - Mars 2024",
+                contexte: "Dans le cadre de la SAE 1.4, j'ai été amené à réaliser un site web multipages afin de valider mes compétences en développement et en intégration web. Le thème était libre, ce qui m'a permis de travailler sur un sujet personnel et motivant, tout en respectant un cahier des charges précis et des contraintes techniques actuelles du web.",
+                objectifs_techniques: [
+                    "Concevoir un site attrayant, structuré et accessible, conforme aux normes du W3C et aux critères WCAG 2.0 AA",
+                    "Créer un site responsive (adaptatif sur PC, tablette et mobile)",
+                    "Intégrer des mises en page modernes avec Flexbox et/ou CSS Grid",
+                    "Ajouter au moins une animation CSS",
+                    "Versionner le projet et le mettre en ligne sur GitHub Pages avec une documentation claire et détaillée"
+                ],
+                ma_participation: "En tant que concepteur et développeur web, j'ai créé un site web multipages respectant les standards HTML5 et CSS3, tout en appliquant une charte graphique cohérente et responsive adaptée à tous les écrans.",
+                taches_realisees: [
+                    "Définition du thème du site en lien avec mes centres d'intérêt personnels",
+                    "Conception de la structure du site avec une arborescence claire et intuitive",
+                    "Réalisation des maquettes et choix de la palette de couleurs pour assurer une identité visuelle homogène",
+                    "Développement des pages HTML en respectant la sémantique et les standards W3C",
+                    "Mise en forme avancée avec CSS3 en utilisant Flexbox et CSS Grid pour la disposition des éléments",
+                    "Intégration de contenus textuels et visuels optimisés pour l'accessibilité (norme WCAG 2.0 AA)",
+                    "Ajout d'animations CSS pour dynamiser l'expérience utilisateur",
+                    "Tests d'affichage pour garantir l'adaptabilité du site sur PC, tablette et mobile (Responsive Web Design)",
+                    "Versionnage du projet avec Git : plusieurs commits clairs et détaillés",
+                    "Publication du site sur GitHub Pages et rédaction d'un README complet avec présentation du projet et lien vers le site en ligne"
+                ],
+                preuves_travail: [
+                    "Site web publié sur GitHub Pages",
+                    "Code source versionné sur GitHub",
+                    "Documentation technique complète",
+                    "Tests de compatibilité multi-navigateurs"
+                ],
+                bilan_personnel: "Cette SAE m'a permis de mettre en pratique mes connaissances en HTML, CSS et design web. J'ai amélioré ma capacité à créer un site responsive et conforme aux standards du Web. La gestion du projet via Git et GitHub m'a également familiarisé avec les bonnes pratiques de versionnage et de déploiement. Ce projet m'a donné confiance en ma capacité à produire un site propre, esthétique et accessible pour tout type d'utilisateur.",
                 competences_validees: ["UE3"]
             },
 
-            integration_systeme: {
+            API: {
+                nom: "Application de Monitoring Réseau",
+                periode: "SAE 1.5 - Décembre 2024",
+                contexte: "Développement d'une application web responsive permettant de visualiser en temps réel l'état des équipements réseau du laboratoire en utilisant une API météorologique pour démontrer les compétences en traitement de données.",
+                objectifs_techniques: [
+                    "Interface web responsive avec dashboard interactif",
+                    "Récupération de données via API REST",
+                    "Traitement et affichage dynamique des données",
+                    "Système d'affichage temps réel",
+                    "Graphiques dynamiques et interface utilisateur moderne"
+                ],
+                ma_participation: "Développement complet de l'application, de l'architecture frontend à l'intégration API.",
+                taches_realisees: [
+                    "Conception de l'architecture de l'application web",
+                    "Développement des requêtes API pour collecte de données",
+                    "Création de l'interface utilisateur responsive",
+                    "Implémentation du système d'affichage temps réel",
+                    "Tests et validation de l'application"
+                ],
+                preuves_travail: [
+                    "Application web fonctionnelle",
+                    "Code source documenté",
+                    "Interface utilisateur responsive",
+                    "Démonstration du traitement de données API"
+                ],
+                bilan_personnel: "Ce projet m'a permis de combiner mes compétences réseau avec le développement web, créant une solution pratique répondant à un vrai besoin de monitoring. J'ai approfondi mes connaissances en JavaScript et en intégration d'APIs.",
+                competences_validees: ["UE3"]
+            },
+
+            Windows_server: {
                 nom: "Intégration Système Hybride",
                 periode: "SAE 2.1 - Janvier 2024",
-                contexte: "Mise en place d'un environnement système hybride Linux/Windows avec services d'annuaire centralisés.",
+                contexte: "Dans le cadre de cette SAE, j'ai participé à la mise en place d'un environnement système hybride Linux/Windows afin de centraliser la gestion des utilisateurs et des ressources. Le projet incluait le déploiement d'Active Directory sur Windows Server 2022, la configuration de Samba sur des serveurs Ubuntu pour assurer l'interopérabilité, et la synchronisation LDAP entre les systèmes.",
                 objectifs_techniques: [
                     "Déploiement d'Active Directory sur Windows Server 2022",
                     "Configuration de Samba sur serveurs Linux Ubuntu",
@@ -1508,30 +1975,62 @@ function collecterDonneesEquipement($ip_equipement) {
                     "Scripts de sauvegarde automatisée",
                     "Politique de sécurité unifiée"
                 ],
-                ma_participation: "Conception et implémentation de l'intégration inter-systèmes.",
+                ma_participation: "En tant que responsable de l'intégration inter-systèmes, j'ai conçu et implémenté la liaison entre les serveurs Windows et Linux. J'ai installé les contrôleurs de domaine, configuré la synchronisation LDAP, développé des scripts d'automatisation, mis en place les GPO pour appliquer les politiques de sécurité et rédigé la documentation technique de l'ensemble de la solution.",
                 taches_realisees: [
-                    "Installation des contrôleurs de domaine",
-                    "Paramétrage de la synchronisation LDAP",
-                    "Développement de scripts d'automatisation",
-                    "Configuration des GPO",
-                    "Tests et documentation"
+                    "Installation et configuration des contrôleurs de domaine Active Directory sur Windows Server 2022",
+                    "Mise en place et configuration du service Samba sur serveurs Ubuntu",
+                    "Paramétrage de la synchronisation LDAP pour assurer la cohérence des annuaires",
+                    "Développement de scripts de sauvegarde automatisée en Shell",
+                    "Création et déploiement des GPO pour appliquer une politique de sécurité homogène",
+                    "Réalisation de tests fonctionnels pour vérifier l'intégration entre systèmes",
+                    "Rédaction de la documentation technique détaillée et des schémas d'architecture"
                 ],
                 preuves_travail: [
                     "Scripts d'automatisation développés",
-                    "Documentation technique de l'intégration"
+                    "Documentation technique de l'intégration",
+                    "Configurations Active Directory et Samba",
+                    "Tests de fonctionnement inter-systèmes"
                 ],
-                extrait_config: `# Script de synchronisation LDAP
-#!/bin/bash
-ldapsearch -x -H ldap://dc.local -D "CN=admin,DC=local" \\
-  -w $AD_PASSWORD "(objectClass=user)" > users_ad.ldif`,
-                bilan_personnel: "Cette SAE m'a confronté aux enjeux réels de l'intégration système en environnement hétérogène.",
+                bilan_personnel: "Cette SAE m'a confronté aux problématiques concrètes de l'intégration de systèmes hétérogènes. J'ai consolidé mes compétences en administration système sous Linux et Windows, en gestion d'annuaires LDAP et en scripting pour l'automatisation des tâches. J'ai également pris conscience de l'importance de la sécurité et de la sauvegarde dans une infrastructure d'entreprise complexe.",
                 competences_validees: ["UE1", "UE2"]
             },
 
-            analyse_signaux: {
+            instant_weather: {
+                nom: "Instant Weather - Affichage dynamique de données météorologiques",
+                periode: "SAE 2.03 - Avril 2024",
+                contexte: "Dans le cadre de cette SAE, j'ai conçu et développé une page web interactive permettant d'afficher en temps réel les informations météorologiques pour une commune choisie par l'utilisateur. Ce projet a été réalisé en JavaScript, HTML et CSS, en respectant les standards du W3C et les critères d'accessibilité WCAG 2.0 AA.",
+                objectifs_techniques: [
+                    "Consommer une API Météo selon la documentation officielle",
+                    "Manipuler le DOM pour insérer dynamiquement du contenu dans une page web",
+                    "Gérer la mise en forme dynamique via JavaScript et CSS",
+                    "Concevoir une page web responsive compatible PC, tablette et mobile",
+                    "Valider le code HTML et CSS avec les validateurs W3C",
+                    "Garantir une accessibilité conforme à la norme WCAG 2.0 AA"
+                ],
+                ma_participation: "J'ai pris en charge l'intégralité du développement du projet, de la conception de l'interface utilisateur à la programmation de la logique JavaScript pour interagir avec l'API Météo et mettre à jour dynamiquement la page.",
+                taches_realisees: [
+                    "Conception et intégration du formulaire de saisie du code postal",
+                    "Programmation de la récupération des données météorologiques via l'API",
+                    "Affichage dynamique des prévisions météo dans la page web",
+                    "Stylisation et mise en page responsive avec CSS",
+                    "Tests fonctionnels et débogage du script JavaScript",
+                    "Validation du code HTML et CSS pour conformité W3C",
+                    "Publication du projet sur GitHub Pages et documentation du repository"
+                ],
+                preuves_travail: [
+                    "Lien vers le site : https://the-dark-zidan.github.io/SAE23-Instant-Weather/",
+                    "Captures d'écran du site en fonctionnement",
+                    "Code source disponible sur le repository GitHub",
+                    "Documentation technique du projet"
+                ],
+                bilan_personnel: "Cette SAE m'a permis de me familiariser avec l'utilisation d'une API tierce et la manipulation avancée du DOM en JavaScript. J'ai développé de nouvelles compétences en débogage et en structuration de scripts côté client. Avec le recul, je planifierais davantage de temps pour les tests et la gestion des erreurs afin d'optimiser la robustesse de la page.",
+                competences_validees: ["UE3"]
+            },
+
+            analyse_de_signaux: {
                 nom: "Analyse de Signaux Radioélectriques",
                 periode: "SAE 2.2 - Février 2024",
-                contexte: "Étude approfondie des signaux de télécommunications locaux en utilisant des équipements de mesure professionnels.",
+                contexte: "Étude approfondie des signaux de télécommunications locaux en utilisant des équipements de mesure professionnels et des outils d'analyse numérique pour caractériser la qualité des liaisons radio.",
                 objectifs_techniques: [
                     "Mesures avec analyseur de spectre",
                     "Programmation d'outils d'analyse sous MATLAB",
@@ -1539,60 +2038,55 @@ ldapsearch -x -H ldap://dc.local -D "CN=admin,DC=local" \\
                     "Cartographie de couverture radioélectrique",
                     "Analyse de qualité des liaisons"
                 ],
-                ma_participation: "Développement des outils d'analyse et traitement des mesures.",
+                ma_participation: "Développement des outils d'analyse et traitement des mesures de terrain.",
                 taches_realisees: [
-                    "Programmation des algorithmes d'analyse spectrale",
-                    "Réalisation des campagnes de mesures",
-                    "Développement d'interfaces graphiques",
-                    "Traitement statistique des données",
-                    "Rédaction du rapport d'analyse"
+                    "Programmation des algorithmes d'analyse spectrale et temporelle sous MATLAB",
+                    "Réalisation de campagnes de mesures sur le terrain à l'aide d'un analyseur de spectre et d'une clé RTL-SDR",
+                    "Développement d'interfaces graphiques pour faciliter la visualisation des résultats",
+                    "Traitement statistique et nettoyage des données brutes",
+                    "Production d'une cartographie précise de la couverture et analyse des zones de perturbations",
+                    "Rédaction du rapport final et présentation orale des résultats"
                 ],
                 preuves_travail: [
-                    "Code MATLAB des outils développés",
-                    "Certificat MATLAB Onramp validé"
+                    "Code MATLAB des outils d'analyse développés",
+                    "Certificat de formation MATLAB Onramp complété",
+                    "Rapport d'analyse complet avec graphiques et interprétations",
+                    "Cartographie de couverture radioélectrique"
                 ],
-                extrait_config: `% Analyse spectrale automatisée en MATLAB
-function analyseSpectrale(signal, fe)
-    N = length(signal);
-    Y = fft(signal);
-    f = (0:N-1)*(fe/N);
-    plot(f, abs(Y));
-    title('Analyse Spectrale du Signal');
-end`,
-                bilan_personnel: "Cette SAE m'a fait découvrir l'analyse des signaux sous un angle très pratique. Le développement sous MATLAB m'a permis d'automatiser les analyses.",
+                bilan_personnel: "Cette SAE m'a permis de consolider mes compétences en traitement du signal, en programmation scientifique et en utilisation d'instruments de mesure radio. J'ai pu travailler de manière autonome sur la conception d'outils d'analyse et acquérir une meilleure compréhension des problématiques liées à la qualité des liaisons radio en environnement réel.",
                 competences_validees: ["UE2"]
             },
 
             projet_integratif: {
                 nom: "Projet Intégratif - Solution Complète",
                 periode: "SAE 2.4 - Avril-Mai 2024",
-                contexte: "Projet de synthèse mobilisant toutes les compétences acquises : conception d'une solution complète pour une startup.",
+                contexte: "Dans le cadre de cette SAE, j'ai participé à un projet de synthèse mobilisant l'ensemble des compétences acquises au cours des semestres précédents. L'objectif était de concevoir une solution complète et réaliste pour une startup, intégrant à la fois une infrastructure réseau évolutive, des services cloud hybrides, une application web de gestion et une politique de sécurité robuste.",
                 objectifs_techniques: [
-                    "Architecture réseau évolutive (LAN/WAN/VPN)",
-                    "Services cloud hybrides",
-                    "Application web de gestion CRM",
-                    "Politique de sécurité globale",
-                    "Plan de continuité d'activité"
+                    "Installer et configurer un serveur Debian 12 pour héberger des sites web internes et externes",
+                    "Déployer un Windows Server 2019 avec rôle de contrôleur de domaine Active Directory",
+                    "Créer et organiser l'arborescence des utilisateurs et des partages réseau",
+                    "Mettre en place la sécurité (SSH sécurisé, clés, désactivation des services non sûrs)",
+                    "Assurer la bonne intégration des stations clientes au domaine Windows"
                 ],
-                ma_participation: "Chef de projet technique, coordination de l'équipe de 4 personnes.",
+                ma_participation: "Chef de projet technique, coordination de l'équipe de 4 personnes et responsable de l'architecture système.",
                 taches_realisees: [
-                    "Planification du projet et répartition des tâches",
-                    "Architecture de l'infrastructure réseau complète",
-                    "Intégration des solutions cloud et on-premise",
-                    "Coordination avec les développeurs",
-                    "Présentation finale devant jury professionnel"
+                    "Installation et configuration du serveur Debian 12 sans interface graphique",
+                    "Déploiement de deux sites web via Nginx avec gestion des hôtes virtuels",
+                    "Sécurisation de l'accès SSH selon les recommandations de l'ANSSI",
+                    "Création d'une VM Windows Server 2019 avec pilotes Virtio et configuration UEFI",
+                    "Mise en place du rôle Active Directory et création du domaine Gx.test",
+                    "Création des comptes utilisateurs et des partages réseau via ADGLP",
+                    "Intégration et test d'une station physique dans le domaine",
+                    "Rédaction de la documentation technique et des schémas d'architecture système"
                 ],
                 preuves_travail: [
-                    "Dossier technique complet du projet",
-                    "Présentation PowerPoint de soutenance"
+                    "Captures d'écran des configurations Debian et Windows Server",
+                    "Scripts et fichiers de configuration Nginx",
+                    "Schéma logique et schéma physique de l'infrastructure",
+                    "Documentation détaillée du domaine et des partages",
+                    "Tests de fonctionnement et validation"
                 ],
-                extrait_config: `# Configuration VPN site-to-site
-crypto isakmp policy 10
- encr aes 256 
- hash sha256
- authentication pre-share
- group 14`,
-                bilan_personnel: "Ce projet final était l'aboutissement de ma formation. La gestion d'équipe était un défi nouveau nécessitant de concilier aspects techniques et relationnels.",
+                bilan_personnel: "Cette SAE m'a permis de consolider mes compétences en administration système sur Linux et Windows. J'ai appris à gérer l'interopérabilité entre un environnement open-source et un domaine Microsoft, à automatiser certaines tâches et à appliquer des règles de sécurité strictes. Ce projet m'a également sensibilisé à la rigueur nécessaire pour documenter une architecture système complète et à l'importance du travail en équipe.",
                 competences_validees: ["UE1", "UE2", "UE3"]
             }
         };
@@ -1603,6 +2097,7 @@ crypto isakmp policy 10
             configurerNavigation();
             initialiserAnimations();
             configurerEvenementsModale();
+            creerParticules();
             
             // Afficher la section d'introduction par défaut
             afficherSection('introduction');
@@ -1610,18 +2105,29 @@ crypto isakmp policy 10
 
         // Fonction principale de démarrage
         function demarrerPortfolio() {
-            console.log('🚀 Démarrage du portfolio - Zidan Abdullah');
+            console.log('🚀 Portfolio Premium - Zidan Abdullah');
             
-            // Animation d'entrée
+            // Animation d'entrée avec délai
             setTimeout(() => {
                 document.body.classList.add('portfolio-loaded');
             }, 500);
+
+            // Gestion du scroll pour la navigation
+            window.addEventListener('scroll', function() {
+                const nav = document.querySelector('.nav');
+                if (window.scrollY > 100) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
         }
 
-        // Configuration de la navigation
+        // Configuration de la navigation améliorée
         function configurerNavigation() {
             const liensNavigation = document.querySelectorAll('.menu-navigation a');
             const boutonsAction = document.querySelectorAll('.bouton-action');
+            const cerclesNavigation = document.querySelectorAll('.nav-circle');
             
             // Navigation principale
             liensNavigation.forEach(lien => {
@@ -1631,6 +2137,18 @@ crypto isakmp policy 10
                     if (sectionCible) {
                         afficherSection(sectionCible);
                         mettreAJourNavigationActive(lien);
+                    }
+                });
+            });
+            
+            // Navigation circulaire
+            cerclesNavigation.forEach(cercle => {
+                cercle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const sectionCible = cercle.getAttribute('data-section');
+                    if (sectionCible) {
+                        afficherSection(sectionCible);
+                        mettreAJourNavigationCirculaire(cercle);
                     }
                 });
             });
@@ -1648,50 +2166,66 @@ crypto isakmp policy 10
                 }
             });
 
-            // Navigation par ancres (liens dans la nav)
+            // Navigation par ancres
             document.querySelectorAll('.nav-links a').forEach(lien => {
                 lien.addEventListener('click', (e) => {
                     e.preventDefault();
                     const href = lien.getAttribute('href');
                     
-                    if (href === '#home') {
-                        afficherSection('introduction');
-                    } else if (href === '#about') {
-                        afficherSection('about');
-                    } else if (href === '#skills') {
-                        afficherSection('competences');
-                    } else if (href === '#projects') {
-                        afficherSection('projects');
-                    } else if (href === '#contact') {
-                        afficherSection('contact');
+                    let section = '';
+                    switch(href) {
+                        case '#home': section = 'introduction'; break;
+                        case '#about': section = 'about'; break;
+                        case '#skills': section = 'competences'; break;
+                        case '#projects': section = 'projects'; break;
+                        case '#contact': section = 'contact'; break;
                     }
                     
-                    mettreAJourNavigationActive(lien);
+                    if (section) {
+                        afficherSection(section);
+                        mettreAJourNavigationActive(lien);
+                    }
                 });
             });
         }
 
-        // Affichage des sections avec transitions
+        // Mise à jour de la navigation circulaire
+        function mettreAJourNavigationCirculaire(cercleActif) {
+            document.querySelectorAll('.nav-circle').forEach(cercle => {
+                cercle.classList.remove('active');
+            });
+            cercleActif.classList.add('active');
+        }
+
+        // Affichage des sections avec transitions fluides
         function afficherSection(idSection) {
-            // Masquer toutes les sections
+            // Masquer toutes les sections avec animation
             document.querySelectorAll('.section-contenu').forEach(section => {
                 section.classList.remove('section-active');
             });
             
-            // Afficher la section demandée
+            // Afficher la section demandée avec animation
             const sectionCible = document.getElementById(idSection);
             if (sectionCible) {
-                sectionCible.classList.add('section-active');
-                sectionCible.classList.add('animation-entree');
-                PORTFOLIO_CONFIG.currentPage = idSection;
-                
-                // Animations spécifiques selon la section
-                if (idSection === 'competences') {
-                    setTimeout(() => animerBarresProgression(), 300);
-                }
-                
-                // Scroll vers le haut
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setTimeout(() => {
+                    sectionCible.classList.add('section-active');
+                    sectionCible.classList.add('animation-entree');
+                    PORTFOLIO_CONFIG.currentPage = idSection;
+                    
+                    // Animations spécifiques selon la section
+                    if (idSection === 'competences') {
+                        setTimeout(() => animerBarresProgression(), 500);
+                    }
+                    
+                    // Mise à jour de la navigation circulaire
+                    const cercleCorrespondant = document.querySelector(`[data-section="${idSection}"]`);
+                    if (cercleCorrespondant && cercleCorrespondant.classList.contains('nav-circle')) {
+                        mettreAJourNavigationCirculaire(cercleCorrespondant);
+                    }
+                    
+                    // Scroll fluide vers le haut
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
             }
             
             // Gestion de l'affichage du hero
@@ -1711,11 +2245,8 @@ crypto isakmp policy 10
             lienActif.classList.add('active');
         }
 
-        // Système d'animations
+        // Système d'animations avancé
         function initialiserAnimations() {
-            // Création des nœuds animés en arrière-plan
-            createNetworkNodes();
-            
             // Observer pour les animations au scroll
             const observateur = new IntersectionObserver((entrees) => {
                 entrees.forEach(entree => {
@@ -1726,13 +2257,19 @@ crypto isakmp policy 10
                         const barresProgression = entree.target.querySelectorAll('.barre-progression');
                         barresProgression.forEach(barre => {
                             const pourcentage = barre.getAttribute('data-progression');
-                            barre.style.width = pourcentage + '%';
+                            setTimeout(() => {
+                                barre.style.width = pourcentage + '%';
+                            }, 200);
                         });
                     }
                 });
-            }, { threshold: 0.1 });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
 
-            document.querySelectorAll('.fade-in, .skill-card, .project-card').forEach(el => {
+            // Observer tous les éléments avec animations
+            document.querySelectorAll('.fade-in, .skill-card, .project-card, .carte-projet').forEach(el => {
                 observateur.observe(el);
             });
         }
@@ -1743,24 +2280,35 @@ crypto isakmp policy 10
                 setTimeout(() => {
                     const pourcentage = barre.getAttribute('data-progression');
                     barre.style.width = pourcentage + '%';
-                }, index * 200);
+                }, index * 150);
             });
         }
 
-        // Création des nœuds réseau animés
-        function createNetworkNodes() {
-            const heroBg = document.querySelector('.hero-bg');
-            if (!heroBg) return;
+        // Création des particules flottantes
+        function creerParticules() {
+            const container = document.querySelector('.floating-particles');
+            if (!container) return;
             
-            const nodeCount = 30;
+            const nombreParticules = 20;
             
-            for (let i = 0; i < nodeCount; i++) {
-                const node = document.createElement('div');
-                node.className = 'network-node';
-                node.style.left = Math.random() * 100 + '%';
-                node.style.top = Math.random() * 100 + '%';
-                node.style.animationDelay = Math.random() * 2 + 's';
-                heroBg.appendChild(node);
+            for (let i = 0; i < nombreParticules; i++) {
+                const particule = document.createElement('div');
+                particule.className = 'particle';
+                
+                // Taille aléatoire
+                const taille = Math.random() * 4 + 2;
+                particule.style.width = taille + 'px';
+                particule.style.height = taille + 'px';
+                
+                // Position aléatoire
+                particule.style.left = Math.random() * 100 + '%';
+                particule.style.top = Math.random() * 100 + '%';
+                
+                // Délai d'animation aléatoire
+                particule.style.animationDelay = Math.random() * 6 + 's';
+                particule.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                
+                container.appendChild(particule);
             }
         }
 
@@ -1810,6 +2358,15 @@ crypto isakmp policy 10
                 fenetre.style.display = 'flex';
                 fenetre.classList.add('modal-active');
                 document.body.style.overflow = 'hidden';
+                
+                // Animation d'ouverture
+                setTimeout(() => {
+                    const contenu = fenetre.querySelector('.modal-content');
+                    if (contenu) {
+                        contenu.style.transform = 'scale(1)';
+                        contenu.style.opacity = '1';
+                    }
+                }, 10);
             }
         }
 
@@ -1818,7 +2375,7 @@ crypto isakmp policy 10
                 `<span class="etiquette-competence">${comp}</span>`
             ).join('');
             
-            // Génération du contenu au format document
+            // Génération du contenu structuré
             const htmlObjectifs = projet.objectifs_techniques.map(obj => 
                 `<p class="objectif-texte">${obj}</p>`
             ).join('');
@@ -1827,18 +2384,9 @@ crypto isakmp policy 10
                 `<p class="tache-texte">${tache}</p>`
             ).join('');
 
-            const htmlPreuves = projet.preuves_travail.map(preuve => 
+            const htmlPreuves = projet.preuves_travail ? projet.preuves_travail.map(preuve => 
                 `<p class="preuve-texte">${preuve}</p>`
-            ).join('');
-            
-            const htmlCode = projet.extrait_config ? 
-                `<div class="bloc-code">
-                    <div class="en-tete-code">
-                        <span class="titre-code">Extrait de configuration</span>
-                        <button class="copier-code" onclick="copierCode(this)">📋</button>
-                    </div>
-                    <pre><code>${escapeHtml(projet.extrait_config)}</code></pre>
-                </div>` : '';
+            ).join('') : '';
             
             return `
                 <div class="contenu-modale">
@@ -1850,92 +2398,133 @@ crypto isakmp policy 10
                     </header>
                     
                     <section class="section-modale">
-                        <h3>Contexte </h3>
-                        <div class="contexte-highlight">
-                            <p class="contexte-projet">${projet.contexte}</p>
+                        <h3>📋 Contexte du projet</h3>
+                        <div class="contexte-projet">
+                            ${projet.contexte}
                         </div>
                         
+                        <h4>🎯 Objectifs techniques</h4>
                         <div class="objectifs-section">
                             ${htmlObjectifs}
                         </div>
                     </section>
                     
                     <section class="section-modale">
-                        <h3>Ma contribution personnelle</h3>
-                        <div class="contribution-highlight">
-                            <p class="participation-projet">${projet.ma_participation}</p>
+                        <h3>👨‍💻 Ma contribution personnelle</h3>
+                        <div class="participation-projet">
+                            ${projet.ma_participation}
                         </div>
                         
+                        <h4>✅ Tâches réalisées</h4>
                         <div class="taches-section">
                             ${htmlTaches}
                         </div>
                     </section>
                     
+                    ${htmlPreuves ? `
                     <section class="section-modale">
-                        <h3>Traces du projet</h3>
+                        <h3>📊 Traces et livrables du projet</h3>
                         <div class="preuves-section">
                             ${htmlPreuves}
                         </div>
-                        ${htmlCode}
                     </section>
+                    ` : ''}
                     
                     <section class="section-modale">
-                        <h3>Bilan personnel et apprentissages</h3>
-                        <p class="bilan-projet">${projet.bilan_personnel}</p>
+                        <h3>💡 Bilan personnel et apprentissages</h3>
+                        <div class="bilan-projet">
+                            ${projet.bilan_personnel}
+                        </div>
                     </section>
                     
                     <footer class="pied-modale">
-                        <h3>Compétences validées</h3>
+                        <h3>🎓 Compétences validées</h3>
                         <div class="competences-projet">${etiquettesCompetences}</div>
                     </footer>
                 </div>
             `;
         }
 
-        function escapeHtml(texte) {
-            const div = document.createElement('div');
-            div.textContent = texte;
-            return div.innerHTML;
-        }
-
-        function copierCode(bouton) {
-            const blocCode = bouton.closest('.bloc-code');
-            const code = blocCode.querySelector('code').textContent;
-            
-            navigator.clipboard.writeText(code).then(() => {
-                bouton.textContent = '✅';
-                setTimeout(() => {
-                    bouton.textContent = '📋';
-                }, 2000);
-            }).catch(() => {
-                // Fallback pour navigateurs plus anciens
-                const textarea = document.createElement('textarea');
-                textarea.value = code;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                bouton.textContent = '✅';
-                setTimeout(() => bouton.textContent = '📋', 2000);
-            });
-        }
-
         function fermerModale() {
             const fenetre = document.getElementById('fenetreModale');
             if (fenetre) {
-                fenetre.classList.remove('modal-active');
+                const contenu = fenetre.querySelector('.modal-content');
+                if (contenu) {
+                    contenu.style.transform = 'scale(0.8)';
+                    contenu.style.opacity = '0';
+                }
+                
                 setTimeout(() => {
+                    fenetre.classList.remove('modal-active');
                     fenetre.style.display = 'none';
+                    document.body.style.overflow = '';
                 }, 300);
             }
-            document.body.style.overflow = '';
         }
+
+        // Fonction pour changer la photo de profil
+        function changerPhotoProfile(urlImage) {
+            const profileImage = document.getElementById('profileImage');
+            if (profileImage && urlImage) {
+                profileImage.src = urlImage;
+                profileImage.style.objectFit = 'cover';
+                
+                // Ajouter un effet de chargement
+                profileImage.onload = function() {
+                    this.style.opacity = '0';
+                    setTimeout(() => {
+                        this.style.transition = 'opacity 0.5s ease';
+                        this.style.opacity = '1';
+                    }, 100);
+                };
+            }
+        }
+
+        // Effets interactifs avancés
+        function ajouterEffetsInteractifs() {
+            // Effet de survol sur les cartes de compétences
+            document.querySelectorAll('.skill-card').forEach(carte => {
+                carte.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-15px) scale(1.02)';
+                });
+                
+                carte.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Effet de parallax léger sur le hero
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero');
+                if (hero) {
+                    hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+
+            // Animation des icônes au survol
+            document.querySelectorAll('.skill-icon i, .nav-circle i').forEach(icone => {
+                icone.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.2) rotate(10deg)';
+                });
+                
+                icone.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+        }
+
+        // Fonction globale pour fermer la modale (appelée par le bouton)
+        window.fermerModale = fermerModale;
+
+        // Fonction globale pour changer la photo
+        window.changerPhotoProfile = changerPhotoProfile;
 
         // Fonctions utilitaires globales
         window.portfolio = {
             debug: () => {
                 console.table(PORTFOLIO_CONFIG);
-                console.log('Projets:', Object.keys(PROJETS_ACADEMIQUES));
+                console.log('Projets disponibles:', Object.keys(PROJETS_ACADEMIQUES));
                 console.log('Section actuelle:', PORTFOLIO_CONFIG.currentPage);
             },
             
@@ -1945,13 +2534,36 @@ crypto isakmp policy 10
             
             ouvrirProjet: (id) => {
                 ouvrirModaleProjet(id);
+            },
+
+            changerPhoto: (url) => {
+                changerPhotoProfile(url);
+            },
+
+            // Fonction pour injecter votre vraie photo
+            mettreVotrePhoto: () => {
+                // Remplacez cette URL par l'URL de votre photo
+                const urlPhoto = 'URL_DE_VOTRE_PHOTO_ICI';
+                changerPhotoProfile(urlPhoto);
             }
         };
 
-        // Console de bienvenue
-        console.log('%c🎓 Portfolio Zidan Abdullah', 'color: #00C4FF; font-size: 16px; font-weight: bold;');
-        console.log('💻 BUT Réseaux & Télécommunications');
-        console.log('🔧 Version: 2024.1');
+        // Initialisation des effets une fois le DOM chargé
+        setTimeout(() => {
+            ajouterEffetsInteractifs();
+        }, 1000);
+
+        // Console de bienvenue stylée
+        console.log('%c🎓 Portfolio Premium - Zidan Abdullah', 'color: #E50914; font-size: 20px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
+        console.log('%c💻 BUT Réseaux & Télécommunications', 'color: #8A2BE2; font-size: 14px; font-weight: 600;');
+        console.log('%c🚀 Version: 2024.3 - Design Netflix Style', 'color: #FF1493; font-size: 12px;');
+        console.log('%c✨ Fonctionnalités disponibles:', 'color: #E50914; font-size: 12px; font-weight: bold;');
+        console.log('%c   - Navigation circulaire interactive', 'color: #B8B8B8; font-size: 11px;');
+        console.log('%c   - Modales de projets détaillées', 'color: #B8B8B8; font-size: 11px;');
+        console.log('%c   - Animations fluides et effets premium', 'color: #B8B8B8; font-size: 11px;');
+        console.log('%c   - Design responsive et élégant', 'color: #B8B8B8; font-size: 11px;');
+        console.log('%c   - Stats tech et passions intégrées', 'color: #B8B8B8; font-size: 11px;');
+        console.log('%c📸 Pour changer votre photo: portfolio.changerPhoto("URL_DE_VOTRE_PHOTO")', 'color: #8A2BE2; font-size: 11px; font-style: italic;');
     </script>
 </body>
 </html>
